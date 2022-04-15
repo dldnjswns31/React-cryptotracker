@@ -78,7 +78,6 @@ function Coins() {
   // react-query는 데이터를 캐시에 저장해두기 때문에 coin 컴포넌트에서 돌아와도 loading이 나타나지 않고 데이터가 바로 나타난다.
 
   const { isLoading, data } = useQuery<ICoin[]>("allCoins", fetchCoins);
-
   return (
     <Container>
       <Header>
