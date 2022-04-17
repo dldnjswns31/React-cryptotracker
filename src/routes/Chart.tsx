@@ -21,17 +21,69 @@ function Chart({ coinId }: ChartProps) {
   const { isLoading, data } = useQuery<IData[]>(["ohlcv", coinId], () =>
     fetchCoinHistory(coinId)
   );
+  console.log(data);
   return (
     <div>
       {isLoading ? (
         "Loading chart..."
       ) : (
+        // <ApexChart
+        //   type="line"
+        //   series={[
+        //     {
+        //       name: "Price",
+        //       data: data?.map((price) => price.close) ?? [],
+        //     },
+        //   ]}
+        //   options={{
+        //     theme: { mode: "dark" },
+        //     chart: {
+        //       height: 300,
+        //       width: 500,
+        //       toolbar: { show: false },
+        //       background: "transparent",
+        //     },
+        //     stroke: { curve: "smooth", width: 5 },
+        //     grid: { show: false },
+        //     yaxis: { show: false },
+        //     xaxis: {
+        //       labels: {
+        //         show: false,
+        //       },
+        //       axisTicks: {
+        //         show: false,
+        //       },
+        //       axisBorder: {
+        //         show: false,
+        //       },
+        //       categories: data?.map((price) => price.time_close),
+        //       type: "datetime",
+        //     },
+        //     fill: {
+        //       type: "gradient",
+        //       gradient: { gradientToColors: ["#0be881"], stops: [0, 100] },
+        //     },
+        //     colors: ["#0fbcf9"],
+        //     tooltip: {
+        //       y: {
+        //         formatter: (value) => `$ ${value.toFixed(3)}`,
+        //       },
+        //     },
+        //   }}
+        // />
+
         <ApexChart
-          type="line"
+          type="candlestick"
           series={[
             {
-              name: "Price",
-              data: data?.map((price) => price.close) ?? [],
+              // OHCL
+              data:
+                data?.map((price) => ({
+                  x: price.time_close,
+                  y: [price.open, price.high, price.low, price.close].map(
+                    (value) => value.toFixed(2)
+                  ),
+                })) ?? [],
             },
           ]}
           options={{
@@ -40,9 +92,8 @@ function Chart({ coinId }: ChartProps) {
               height: 300,
               width: 500,
               toolbar: { show: false },
-              background: "transparent",
+              // background: "transparent",
             },
-            stroke: { curve: "smooth", width: 5 },
             grid: { show: false },
             yaxis: { show: false },
             xaxis: {
@@ -58,16 +109,11 @@ function Chart({ coinId }: ChartProps) {
               categories: data?.map((price) => price.time_close),
               type: "datetime",
             },
-            fill: {
-              type: "gradient",
-              gradient: { gradientToColors: ["#0be881"], stops: [0, 100] },
-            },
-            colors: ["#0fbcf9"],
-            tooltip: {
-              y: {
-                formatter: (value) => `$ ${value.toFixed(3)}`,
-              },
-            },
+            // tooltip: {
+            //   y: {
+            //     formatter: (value) => `$ ${value.toFixed(3)}`,
+            //   },
+            // },
           }}
         />
       )}

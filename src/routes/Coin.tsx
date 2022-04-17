@@ -36,7 +36,6 @@ const Header = styled.header`
 `;
 
 const Title = styled.h1`
-  /* position: absolute; */
   font-size: 4rem;
   color: ${(props) => props.theme.accentColor};
   margin: 0 auto;
@@ -250,7 +249,7 @@ function Coin() {
           </Tabs>
           <Switch>
             <Route path={`/:coinId/price`}>
-              <Price />
+              <Price coinId={coinId} />
             </Route>
             <Route path={`/:coinId/chart`}>
               <Chart coinId={coinId} />
