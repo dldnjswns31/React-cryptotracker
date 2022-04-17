@@ -4,6 +4,7 @@ import App from "./App";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./theme";
 import { QueryClient, QueryClientProvider } from "react-query";
+import "./FontAwesome";
 
 const queryClient = new QueryClient();
 

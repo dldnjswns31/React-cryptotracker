@@ -1,5 +1,6 @@
 import { useQuery } from "react-query";
 import { Helmet } from "react-helmet";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Route,
   Switch,
@@ -32,6 +33,23 @@ const Header = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const Title = styled.h1`
+  /* position: absolute; */
+  font-size: 4rem;
+  color: ${(props) => props.theme.accentColor};
+  margin: 0 auto;
+`;
+
+const Home = styled.div`
+  background-color: inherit;
+  font-size: 1.5rem;
+`;
+
+const Loader = styled.span`
+  text-align: center;
+  display: block;
 `;
 
 const Overview = styled.div`
@@ -79,16 +97,6 @@ const Tab = styled.span<{ isActive: boolean }>`
   a {
     display: block;
   }
-`;
-
-const Title = styled.h1`
-  font-size: 4rem;
-  color: ${(props) => props.theme.accentColor};
-`;
-
-const Loader = styled.span`
-  text-align: center;
-  display: block;
 `;
 
 interface InfoData {
@@ -194,6 +202,11 @@ function Coin() {
         </title>
       </Helmet>
       <Header>
+        <Home>
+          <Link to="/">
+            <FontAwesomeIcon icon="coins" />
+          </Link>
+        </Home>
         <Title>
           {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
         </Title>
