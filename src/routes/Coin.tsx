@@ -46,6 +46,11 @@ const Home = styled.div`
   font-size: 1.5rem;
 `;
 
+const ChangeTheme = styled.div`
+  background-color: inherit;
+  font-size: 1.5rem;
+`;
+
 const Loader = styled.span`
   text-align: center;
   display: block;
@@ -209,6 +214,9 @@ function Coin() {
         <Title>
           {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
         </Title>
+        <ChangeTheme>
+          <FontAwesomeIcon icon="coins" />
+        </ChangeTheme>
       </Header>
       {loading ? (
         <Loader>Loading...</Loader>
